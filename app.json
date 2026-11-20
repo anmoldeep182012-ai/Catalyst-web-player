@@ -1,8 +1,8 @@
 {
-  "name": "TgMusicBot",
-  "description": "A Telegram Web Player music bot.",
-  "repository": "https://github.com/AshokShau/TgMusicBot",
-  "logo": "https://raw.githubusercontent.com/AshokShau/TgMusicBot/master/docs/logo.jpeg",
+  "name": "catalyst-music",
+  "description": "Catalyst Music Telegram Mini App and music player.",
+  "repository": "https://github.com/anmoldeep182012-ai/Catalyst-web-player",
+  "logo": "https://files.catbox.moe/a9n3sd.jpg",
   "keywords": [
     "telegram",
     "music",
@@ -30,14 +30,12 @@
       "required": true
     },
     "OWNER_ID": {
-      "description": "The user ID of the bot owner.",
-      "required": false,
-      "value": "5938660179"
+      "description": "Your Telegram user ID. Required by the application.",
+      "required": true
     },
     "LOGGER_ID": {
-      "description": "The group ID for the bot's logs.",
-      "required": true,
-      "value": "-1002166934878"
+      "description": "The Telegram group or channel ID used for application logs.",
+      "required": true
     },
     "MAX_FILE_SIZE": {
       "description": "The maximum file size for downloads (in bytes).",
@@ -47,10 +45,10 @@
     "API_URL": {
       "description": "API URL for external services.",
       "required": false,
-      "value": "https://tgmusic.fallenapi.fun"
+      "value": "https://api.onegrab.fun"
     },
     "API_KEY": {
-      "description": "API key for external services. Get you own from @FallenApiBot -> /apikey",
+      "description": "API key for the configured external media service, if required.",
       "required": false
     },
     "DEFAULT_SERVICE": {
@@ -78,12 +76,12 @@
     "SUPPORT_GROUP": {
       "description": "Link to the support group.",
       "required": false,
-      "value": "https://t.me/GuardxSupport"
+      "value": "https://t.me/CatalystxSupport"
     },
     "SUPPORT_CHANNEL": {
       "description": "Link to the support channel.",
       "required": false,
-      "value": "https://t.me/FallenProjects"
+      "value": "https://t.me/CatalystxSupport"
     },
     "SONG_DURATION_LIMIT": {
       "description": "The maximum duration of a song in seconds.",
