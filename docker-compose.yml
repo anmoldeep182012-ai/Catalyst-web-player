@@ -3,4 +3,5 @@ services:
     build: .
     env_file: .env
     ports:
-      - "${PORT:-8080}:${PORT:-8080}"
+      - "${PORT:-6060}:${PORT:-6060}/tcp"
+      - "${WEBRTC_UDP_PORT_MIN:-40000}-${WEBRTC_UDP_PORT_MAX:-49999}:${WEBRTC_UDP_PORT_MIN:-40000}-${WEBRTC_UDP_PORT_MAX:-49999}/udp"
