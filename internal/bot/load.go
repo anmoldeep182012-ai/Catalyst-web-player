@@ -19,6 +19,8 @@ var startTime = time.Now()
 
 func LoadMiniAppHandlers(c *gotdbot.Client) {
 	// Keep secure group-context verification active when Python Catalyst owns normal bot commands.
+	c.AddUpdateNewCallbackQueryHandlerGroup(recordTelegramChatContext, nil, -1)
+	c.OnUpdateNewCallbackQuery(webAppVerifyCallbackHandler, callbackquery.Prefix("webapp_verify"))
 }
 
 func LoadModules(c *gotdbot.Client, cancelCleanup func(int64)) {
