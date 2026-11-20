@@ -58,7 +58,7 @@ func startHandler(c *td.Client, m *td.Message) error {
 		response := fmt.Sprintf(
 			"<img src=\"%s\"/>\n"+
 				"<h3>Welcome, %s!</h3>\n"+
-				"<p><b>%s</b> lets you stream high-quality synchronized music via Telegram Web Player.</p>\n\n"+
+				"<p><b>%s</b> lets you stream high-quality synchronized music via the Catalyst Music player.</p>\n\n"+
 				"<p><b>Supported platforms:</b> YouTube, Spotify, Apple Music, SoundCloud, Deezer, Twitch, and many more.</p>\n\n"+
 				"<p>Use the buttons below to add the bot to your group or explore the available commands.</p>\n"+
 				"<p>Read /privacy for data use, shared-room visibility, and deletion requests.</p>",
@@ -86,7 +86,7 @@ func startHandler(c *td.Client, m *td.Message) error {
 	htmlText := fmt.Sprintf(
 		"<h3>%s is ready!</h3>\n"+
 			"<p><b>Uptime:</b> <code>%s</code></p>\n"+
-			"<p><i>A feature-rich Web Player music bot for your Telegram groups. Play your favorite tracks seamlessly.</i></p>\n\n"+
+			"<p><i>A feature-rich Catalyst Music player for your Telegram groups. Play your favorite tracks seamlessly.</i></p>\n\n"+
 			"<p><tg-button type=\"url\" url=\"%s\">Updates</tg-button> <tg-button type=\"url\" url=\"%s\">Group</tg-button></p>",
 		c.Me().FirstName,
 		uptime,
