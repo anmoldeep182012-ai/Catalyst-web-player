@@ -75,7 +75,7 @@ export async function lyricsAPI(url, signal) {
 }
 export async function musicAPI(path, options = {}) {
     const response = await fetch(`/api/music-${path}`, { ...options, headers: { 'X-Telegram-Init-Data': launch.initData, ...(options.body ? { 'Content-Type': 'application/json' } : {}) } });
-    if (!response.ok) throw new Error(response.status === 401 ? 'Open SyncTune in Telegram to browse music.' : 'YouTube Music is unavailable. Try again.');
+    if (!response.ok) throw new Error(response.status === 401 ? 'Open Catalyst Music in Telegram to browse music.' : 'YouTube Music is unavailable. Try again.');
     return response.json();
 }
 
@@ -181,7 +181,7 @@ export async function openInBrowser() {
 export async function searchAPI(query, signal) {
     if (Array.from(query).length > state.limits.maxSearchLength) throw new Error(`Searches can contain up to ${state.limits.maxSearchLength} characters.`);
     const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`, { signal, headers: { 'X-Telegram-Init-Data': launch.initData } });
-    if (!response.ok) throw new Error(response.status === 401 ? 'Open SyncTune in Telegram to search music.' : 'Search is unavailable. Try again.');
+    if (!response.ok) throw new Error(response.status === 401 ? 'Open Catalyst Music in Telegram to search music.' : 'Search is unavailable. Try again.');
     const data = await response.json();
     if (data.error) throw new Error(data.error);
     if (Number.isSafeInteger(data.maxDuration) && data.maxDuration > 0) state.limits.maxTrackDuration = data.maxDuration;
