@@ -81,7 +81,10 @@ func main() {
 	}
 
 	cleanupScheduler, stopCleanup := cleanup.Start(client)
-	bot.LoadModules(client, cleanupScheduler.CancelChat)
+	bot.LoadMiniAppHandlers(client)
+	if config.BotCommandsEnabled {
+		bot.LoadModules(client, cleanupScheduler.CancelChat)
+	}
 	_, _ = client.SendMessage(config.LoggerId, "The bot has started!", nil)
 	webapp.RegisterRoutes(client, cleanupScheduler.CancelChat)
 

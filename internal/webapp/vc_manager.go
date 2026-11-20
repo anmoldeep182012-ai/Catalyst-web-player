@@ -12,6 +12,7 @@ import (
 	"slices"
 	"sync"
 
+	"ashokshau/tg-web/internal/config"
 	td "github.com/AshokShau/gotdbot"
 	"github.com/pion/webrtc/v4"
 )
@@ -88,7 +89,24 @@ func newVCManager() *VCManager {
 	if err := engine.RegisterDefaultCodecs(); err != nil {
 		log.Error("[VC] Register codecs", "error", err)
 	}
-	return &VCManager{rooms: make(map[int64]*VCRoom), webrtcAPI: webrtc.NewAPI(webrtc.WithMediaEngine(engine))}
+
+	// Restrict ICE sockets to a documented range so VPS and Docker firewalls
+	// can expose WebRTC media without opening the full UDP port space.
+	settingEngine := webrtc.SettingEngine{}
+	if err := settingEngine.SetEphemeralUDPPortRange(
+		uint16(config.WebRTCUDPPortMin),
+		uint16(config.WebRTCUDPPortMax),
+	); err != nil {
+		log.Error("[VC] Configure ICE UDP port range", "error", err)
+	}
+
+	return &VCManager{
+		rooms: make(map[int64]*VCRoom),
+		webrtcAPI: webrtc.NewAPI(
+			webrtc.WithMediaEngine(engine),
+			webrtc.WithSettingEngine(settingEngine),
+		),
+	}
 }
 func (m *VCManager) GetOrCreateRoom(roomID int64) *VCRoom {
 	m.mu.Lock()

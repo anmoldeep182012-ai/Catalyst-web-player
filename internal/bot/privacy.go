@@ -19,7 +19,7 @@ func privacyText(botName, policyURL, supportURL string) string {
 Telegram IDs, available profile details and authentication data; commands, searches, submitted media, playlists and room settings. Connection and diagnostic logs may contain IDs, IP addresses and error details.
 
 <b>Shared rooms</b>
-Your displayed profile, presence, track requests and room messages are visible to other listeners. Recent room chat stays in server memory (up to 50 messages). Voice audio is relayed through our server to participants; SyncTune does not record it. Participants may make their own copies or recordings.
+Your displayed profile, presence, track requests and room messages are visible to other listeners. Recent room chat stays in server memory (up to 50 messages). Voice audio is relayed through our server to participants; Catalyst Music does not record it. Participants may make their own copies or recordings.
 
 <b>Storage and services</b>
 IDs, playlists, permissions and settings are stored in the database until removed. The player saves preferences and recent tracks on your device. Telegram, hosting, media services, CDNs and Google's STUN service process data needed to deliver their features.

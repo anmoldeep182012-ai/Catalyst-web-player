@@ -19,12 +19,12 @@ import (
 )
 
 const (
-	defaultDBName         = "Anon"
+	defaultDBName         = "CatalystWebApp"
 	defaultAPIURL         = "https://api.onegrab.fun"
 	defaultDownloadsDir   = "downloads"
-	defaultSupportGroup   = "https://t.me/FallenSupport"
-	defaultSupportChannel = "https://t.me/FallenProjects"
-	defaultStartImage     = "https://i.pinimg.com/736x/0d/f4/65/0df465d1e98239ecb6283400605fc813.jpg"
+	defaultSupportGroup   = "https://t.me/CatalystxSupport"
+	defaultSupportChannel = "https://t.me/CatalystxSupport"
+	defaultStartImage     = "https://raw.githubusercontent.com/anmoldeep182012-ai/Catalyst-web-player/master/internal/webapp/static/assets/catalyst-logo.jpg"
 	defaultMaxFileSize    = int64(500 * 1024 * 1024)
 	defaultSongDuration   = int32(3600)
 )
@@ -52,9 +52,12 @@ var (
 	SupportGroup     = getEnv("SUPPORT_GROUP", defaultSupportGroup)
 	SupportChannel   = getEnv("SUPPORT_CHANNEL", defaultSupportChannel)
 	StartImg         = getEnv("START_IMG", defaultStartImage)
-	PrivacyPolicyURL = getEnv("PRIVACY_POLICY_URL", "https://sync.onegrab.fun/privacy")
+	PrivacyPolicyURL = getEnv("PRIVACY_POLICY_URL", "")
 
 	Port = getEnv("PORT", "6060")
+	WebRTCUDPPortMin = getEnvInt32("WEBRTC_UDP_PORT_MIN", 40000)
+	WebRTCUDPPortMax = getEnvInt32("WEBRTC_UDP_PORT_MAX", 49999)
+	BotCommandsEnabled = getEnvBool("BOT_COMMANDS_ENABLED", false)
 
 	DEVS        []int64
 	CookiesPath []string
@@ -121,6 +124,10 @@ func validate() error {
 
 	if SongDurationLimit <= 0 {
 		return fmt.Errorf("SONG_DURATION_LIMIT must be greater than 0")
+	}
+
+	if WebRTCUDPPortMin < 1 || WebRTCUDPPortMax > 65535 || WebRTCUDPPortMax < WebRTCUDPPortMin {
+		return fmt.Errorf("WEBRTC_UDP_PORT_MIN/MAX must be a valid UDP port range (1-65535)")
 	}
 
 	return nil

@@ -15,7 +15,7 @@ code { padding: 2px 5px; border-radius: 6px; background: var(--raised); color: v
 .site-header, .site-footer { width: min(1120px, calc(100% - 64px)); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .site-header { min-height: 80px; padding: 0 24px; margin-top: 20px; background: var(--glass); box-shadow: var(--shadow-surface); border-radius: var(--radius); backdrop-filter: blur(var(--glass-blur)); }
 .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--text); font-size: 20px; font-weight: 600; letter-spacing: -.02em; text-decoration: none; min-height: 44px; }
-.brand-icon { width: 28px; height: 28px; color: var(--accent); }
+.brand-icon { width: 28px; height: 28px; color: var(--accent); object-fit: cover; border-radius: 8px; flex: none; }
 .site-header nav, .site-footer nav { display: flex; gap: 24px; }
 .site-header nav a, .site-footer nav a { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; color: var(--muted); text-decoration: none; }
 .site-header nav a:hover, .site-footer nav a:hover, .site-header nav a[aria-current] { color: var(--accent); }

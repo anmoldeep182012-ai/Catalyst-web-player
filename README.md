@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>🎵 Telegram Web Player</h1>
+<h1>🎵 𝐂ᴀᴛᴀʟʏsᴛ 𝐌ᴜsɪᴄ</h1>
 
 <p>
   <b>A modern, high-performance Telegram web music player with real-time synchronized playback, built-in WebRTC Voice Chat, live room chat, personal playlists, and smart recommendations.</b>
@@ -13,30 +13,30 @@
   <a href="https://www.docker.com/">
     <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
   </a>
-  <a href="https://github.com/AshokShau/telegram-web-player/blob/master/LICENSE">
+  <a href="https://github.com/anmoldeep182012-ai/Catalyst-web-player/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/License-GPL%20v3-4bc51d?style=for-the-badge" alt="License">
   </a>
-  <a href="https://github.com/AshokShau/telegram-web-player/stargazers">
-    <img src="https://img.shields.io/github/stars/AshokShau/telegram-web-player?style=for-the-badge&color=ffd700&logo=github" alt="Stars">
+  <a href="https://github.com/anmoldeep182012-ai/Catalyst-web-player/stargazers">
+    <img src="https://img.shields.io/github/stars/anmoldeep182012-ai/Catalyst-web-player?style=for-the-badge&color=ffd700&logo=github" alt="Stars">
   </a>
-  <a href="https://github.com/AshokShau/telegram-web-player/network/members">
-    <img src="https://img.shields.io/github/forks/AshokShau/telegram-web-player?style=for-the-badge&color=blue&logo=github" alt="Forks">
+  <a href="https://github.com/anmoldeep182012-ai/Catalyst-web-player/network/members">
+    <img src="https://img.shields.io/github/forks/anmoldeep182012-ai/Catalyst-web-player?style=for-the-badge&color=blue&logo=github" alt="Forks">
   </a>
 </p>
 
 ---
 
 <p align="center">
-  <img src=".github/images/dark.png" width="100%" alt="SyncTune desktop room" />
+  <img src="https://raw.githubusercontent.com/anmoldeep182012-ai/Catalyst-web-player/master/internal/webapp/static/assets/catalyst-logo.jpg" width="180" alt="Catalyst Music logo" />
 </p>
 
 <p align="center">
-  <sub>Browser review capture using synthetic fixture music and listeners.</sub>
+  <sub>Official Catalyst Music branding.</sub>
 </p>
 
 
 <p align="center">
-  Telegram Web Player delivers low-latency, ultra-synchronized web playback and voice communication for chat rooms.<br>
+  Catalyst Music Mini App delivers low-latency, ultra-synchronized web playback and voice communication for chat rooms.<br>
   Engineered with <b>Go</b>, <code>gotdbot</code> (TDLib), <b>Pion WebRTC SFU</b>, WebSockets, MongoDB, and a responsive music application.
 </p>
 
@@ -86,7 +86,23 @@
 - **Single Active Session Protection**: Strict single-session per Telegram user enforcement with auto-disconnection and duplicate session alert screen.
 - **Listener Grace Period**: Stops room playback 40 seconds after all listeners leave, preserving the existing server lifecycle.
 
-### 🔐 Security & Access Controls
+### Catalyst bot integration
+
+This Mini App runs alongside [Catalyst-Mujik-Bot](https://github.com/anmoldeep182012-ai/Catalyst-Mujik-Bot).
+
+- The Python bot keeps its existing `/play` and `/vplay` commands and PyTgCalls voice-chat queue.
+- `/player` opens this browser player, with its own synchronized queue, room chat, playlists, and WebRTC voice rooms.
+- **The browser queue and PyTgCalls queue are separate.** This Mini App does not read, modify, or control the Python bot's existing Telegram voice-chat queue.
+- Run this Go service with the same bot token as the Python bot and set `BOT_COMMANDS_ENABLED=false`. The Go service keeps the Mini App's group-context verification callbacks; Python handles normal bot commands.
+- Keep the Go service's MongoDB database separate from the Python bot database. Use `CatalystWebApp` for the Go service.
+
+### BotFather setup
+
+Configure the bot's Mini App in [@BotFather](https://t.me/BotFather), use the title **Catalyst Music Player**, short name **player**, and set the HTTPS URL to `https://YOUR-DOMAIN/room`. Set the bot profile name to **Catalyst Music** and use the supplied artwork.
+
+The group launch uses a **Verify group for player** button to bind the Telegram chat before opening the app.
+
+## 🔐 Security & Access Controls
 - **Telegram Mini App Security**: Cryptographic `initData` HMAC verification against bot token hash to guarantee authenticated user sessions.
 - **Bot Write Access Verification**: Validates Telegram bot messaging permissions (`AllowsWriteToPM`) before accepting playback commands.
 - **Group Governance**: Granular play permissions (Everyone vs Admins) and admin controls (Skip, Stop, Seek, Loop, Queue Clear, End Session).
@@ -138,13 +154,16 @@ cp sample.env .env
 | `API_ID`              | **Yes**  | -                             | Telegram API ID from my.telegram.org.                                                       |
 | `API_HASH`            | **Yes**  | -                             | Telegram API Hash from my.telegram.org.                                                     |
 | `TOKEN`               | **Yes**  | -                             | Telegram Bot Token from @BotFather.                                                         |
-| `OWNER_ID`            | **Yes**  | -                             | Telegram User ID of the bot owner.                                                          |
+| `OWNER_ID`            | **Yes**  | -                             | Numeric Telegram user ID belonging to @Cravenic (the configured owner).                                                          |
 | `MONGO_URI`           | **Yes**  | -                             | MongoDB connection URI string.                                                              |
+| `BOT_COMMANDS_ENABLED` |    No    | `false`                       | Keep false when the Python Catalyst bot handles normal commands; group verification callbacks stay enabled. |
 | `PORT`                |    No    | `6060`                        | Web server HTTP port for Web App and WebSockets.                                            |
+| `WEBRTC_UDP_PORT_MIN` |    No    | `40000`                      | First UDP port used by the Pion WebRTC voice server.                                       |
+| `WEBRTC_UDP_PORT_MAX` |    No    | `49999`                      | Last UDP port used by the Pion WebRTC voice server.                                        |
 | `API_URL`             |    No    | `https://api.onegrab.fun`     | Downloader API endpoint URL.                                                                |
 | `API_KEY`             |    No    | -                             | Optional API Key for downloader API.                                                        |
 | `DL_BOT_TOKEN`        |    No    | -                             | Optional secondary downloader bot token for Telegram file fetching.                         |
-| `DB_NAME`             |    No    | `Anon`                        | Database name inside MongoDB.                                                               |
+| `DB_NAME`             |    No    | `CatalystWebApp`                        | Database name inside MongoDB.                                                               |
 | `LOGGER_ID`           |    No    | `0`                           | Telegram chat/channel ID where bot startup logs and errors are sent.                        |
 | `DEFAULT_SERVICE`     |    No    | `youtube`                     | Default search engine for track queries (`youtube` or `spotify`).                           |
 | `SONG_DURATION_LIMIT` |    No    | `3600`                        | Maximum track duration allowed in seconds (default: 1 hour).                                |
@@ -152,9 +171,9 @@ cp sample.env .env
 | `DOWNLOADS_DIR`       |    No    | `downloads`                   | Local temporary directory for media downloads.                                              |
 | `PROXY`               |    No    | -                             | Optional HTTP/SOCKS proxy URL for external media downloads.                                 |
 | `COOKIES_URL`         |    No    | -                             | Comma-separated HTTP URLs pointing to raw YouTube `cookies.txt` files.                      |
-| `SUPPORT_GROUP`       |    No    | `https://t.me/FallenSupport`  | Support group URL shown in help menus.                                                      |
+| `SUPPORT_GROUP`       |    No    | `https://t.me/CatalystxSupport`  | Support group URL shown in help menus.                                                      |
 | `PRIVACY_POLICY_URL`  |    No    | -                             | Public HTTPS policy URL, e.g. `https://music.yourdomain.com/privacy`, linked by `/privacy`. |
-| `SUPPORT_CHANNEL`     |    No    | `https://t.me/FallenProjects` | Updates channel URL shown in help menus.                                                    |
+| `SUPPORT_CHANNEL`     |    No    | `https://t.me/CatalystxSupport` | Updates channel URL shown in help menus.                                                    |
 | `START_IMG`           |    No    | (default URL)                 | Direct image URL displayed in `/start` command response.                                    |
 | `DEVS`                |    No    | -                             | Space or comma separated list of additional developer user IDs.                             |
 
@@ -169,60 +188,41 @@ cp sample.env .env
 
 Telegram Mini Apps **require** a valid HTTPS domain (`https://`). Below are the easiest ways to expose your local or VPS web player port (`6060`) securely to a custom domain.
 
-#### Option 1: Cloudflare Tunnel with Docker Compose (Easiest & Free)
+#### Option 1: Cloudflare Tunnel (preview only; no WebRTC voice)
 
-Cloudflare Tunnel lets you route traffic from your domain to your local Docker container without opening inbound firewall ports or configuring SSL manually.
-
-1. Go to **Cloudflare Zero Trust Dashboard** -> **Networks** -> **Tunnels** and click **Create a Tunnel**.
-2. Name your tunnel, copy the tunnel token provided (`eyJh...`), and add it to your `.env` file:
-   ```env
-   TUNNEL_TOKEN=eyJh...
-   ```
-3. Route your hostname (e.g. `music.yourdomain.com`) to HTTP service `tg-web:6060` (or `localhost:6060`).
-4. Update your `docker-compose.yml` to include the Cloudflare Tunnel service:
-
-```yaml
-services:
-  tg-web:
-    build: .
-    env_file: .env
-    ports:
-      - "${PORT:-6060}:${PORT:-6060}"
-    restart: unless-stopped
-
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    restart: unless-stopped
-    command: tunnel --no-autoupdate run
-    environment:
-      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-```
-
-5. Run `docker compose up -d` and set your Web App URL in BotFather to `https://music.yourdomain.com/room`.
-
-> **Quick Tunnel (Temporary / Testing):**
-> If you don't own a domain yet, run `cloudflared tunnel --url http://localhost:6060` to instantly get a temporary `https://xxx.trycloudflare.com` URL.
+Cloudflare Tunnel can expose the HTTP player page and WebSocket signaling, but it does not publish the Pion server's inbound UDP media ports. Use it only for a web-interface preview. For working voice rooms, use a VPS with a public IPv4 address, direct UDP firewall access, and Caddy or Nginx.
 
 ---
 
-#### Option 2: Caddy Reverse Proxy (Automatic SSL)
+#### Option 2: Caddy Reverse Proxy (recommended)
 
-Caddy automatically obtains and renews Let's Encrypt TLS/SSL certificates for your domain.
+Caddy obtains and renews HTTPS certificates automatically. Point your DNS A record to the VPS IPv4 address and allow TCP ports 80 and 443.
 
-1. Install Caddy on your server:
-   ```bash
-   sudo apt install -y caddy
-   ```
-2. Edit `/etc/caddy/Caddyfile`:
-   ```caddy
-   music.yourdomain.com {
-       reverse_proxy localhost:6060
-   }
-   ```
-3. Restart Caddy:
-   ```bash
-   sudo systemctl restart caddy
-   ```
+Install Caddy from its official stable repository:
+
+```bash
+sudo apt install --yes debian-keyring debian-archive-keyring apt-transport-https curl gnupg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+sudo chmod o+r /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+sudo chmod o+r /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update
+sudo apt install -y caddy
+```
+
+Edit `/etc/caddy/Caddyfile`:
+
+```caddy
+music.yourdomain.com {
+    reverse_proxy 127.0.0.1:6060
+}
+```
+
+Then reload Caddy:
+
+```bash
+sudo systemctl reload caddy
+```
 
 ---
 
@@ -268,13 +268,13 @@ To attach the Web Player interface to your Telegram bot:
 BotFather:
 Alright, a new web app. Which bot will be offering the web app?
 
-@YourMusicBot
+@CatalystMusicBot
 
 BotFather:
-Creating a new web app for @YourMusicBot.
+Creating a new Mini App for @CatalystMusicBot.
 Please enter a title for the web app.
 
-SyncTune Player
+Catalyst Music Player
 
 BotFather:
 Please enter a short description of the web app.
@@ -301,14 +301,13 @@ BotFather:
 Good! Now please choose a short name for your web app.
 3-30 characters: a-z, A-Z, 0-9, _ or .
 
-- THIS IS IMP DONT CHANGE THIS 
-web 
+player 
 
 BotFather:
-You can now use "web" as the short_name parameter value in Bot API.
+You can now use "player" as the short_name parameter value in Bot API.
 Your web app link is:
 
-https://t.me/YourMusicBot/web
+https://t.me/CatalystMusicBot/player
 ```
 
 </details>
@@ -322,7 +321,9 @@ https://t.me/YourMusicBot/web
 
 <br>
 
-Docker isolates all required dependencies (Go 1.26, FFmpeg, yt-dlp, Deno, TDLib) inside a container.
+Docker isolates all required dependencies (Go, FFmpeg, yt-dlp, Deno, TDLib) inside a container. The Compose file uses Linux host networking so Pion's WebRTC UDP sockets are directly reachable without Docker bridge NAT.
+
+**WebRTC networking requirement:** this app relays voice through its Pion SFU. In addition to HTTPS, allow the configured UDP range (`WEBRTC_UDP_PORT_MIN`–`WEBRTC_UDP_PORT_MAX`, default `40000–49999`) in the VPS firewall. Compose uses host networking; do not add Docker port mappings. A Cloudflare Tunnel by itself is not enough for voice media because browsers must reach the server's ICE UDP candidates directly.
 
 #### 1. Install Docker & Docker Compose
 On Ubuntu / Debian:
@@ -336,8 +337,8 @@ sudo systemctl enable --now docker
 #### 2. Clone Repository & Configure Environment
 
 ```bash
-git clone https://github.com/AshokShau/telegram-web-player.git
-cd telegram-web-player
+git clone https://github.com/anmoldeep182012-ai/Catalyst-web-player.git
+cd Catalyst-web-player
 cp sample.env .env
 nano .env
 ```
@@ -356,7 +357,7 @@ Or using standard Docker CLI:
 
 ```bash
 docker build -t tgweb .
-docker run -d --name tgweb --env-file .env -p 6060:6060 --restart unless-stopped tgweb
+docker run -d --name tgweb --network host --env-file .env --restart unless-stopped tgweb
 ```
 
 #### 4. Container Management
@@ -416,8 +417,8 @@ source ~/.bashrc
 #### 2. Clone Repository & Prepare Configuration
 
 ```bash
-git clone https://github.com/AshokShau/telegram-web-player.git
-cd telegram-web-player
+git clone https://github.com/anmoldeep182012-ai/Catalyst-web-player.git
+cd Catalyst-web-player
 cp sample.env .env
 nano .env
 ```
@@ -556,7 +557,7 @@ When new updates are released, update your deployment using the steps below:
 ### Docker Deployment Update
 
 ```bash
-cd telegram-web-player
+cd Catalyst-web-player
 git pull origin master
 docker compose down
 docker compose up -d --build
@@ -565,7 +566,7 @@ docker compose up -d --build
 ### Linux Deployment Update
 
 ```bash
-cd telegram-web-player
+cd Catalyst-web-player
 # Stop running instance (e.g. exit tmux/screen session)
 
 # Pull latest commits
@@ -635,23 +636,28 @@ This project is licensed under the **GNU General Public License v3.0**. See the 
 
 ## 💬 Support & Updates
 
-- **Support Group**: [Telegram Support](https://t.me/FallenSupport)
-- **Updates Channel**: [Telegram Channel](https://t.me/FallenProjects)
+- **Support Group**: [Telegram Support](https://t.me/CatalystxSupport)
+- **Updates Channel**: [Telegram Channel](https://t.me/CatalystxSupport)
 
 ---
 
-## ❤️ Donate
+## Project owner & maintenance
 
-If you find this project useful, consider supporting its development with a donation:
+- **Owner:** [@Cravenic](https://t.me/Cravenic)
+- **Bot:** [@CatalystMusicBot](https://t.me/CatalystMusicBot)
+- **Repository:** [Catalyst-web-player](https://github.com/anmoldeep182012-ai/Catalyst-web-player)
 
-- **GRAM (TON) / USDT-GRAM:** `UQD8rsWDh3VD9pXVNuEbM_rIAKzV07xDhx-gzdDe0tTWGXan`
-- **USDT (TRC20):** `TJWZqPK5haSE8ZdSQeWBPR5uxPSUnS8Hcq`
-- **Telegram Wallet:** [@Ashokshau](https://t.me/Ashokshau)
+Catalyst Music branding, deployment configuration, and downstream maintenance are managed by @Cravenic.
 
-Thank you for supporting the project!
+## Upstream license notices
 
----
+This repository is a downstream rebrand of an existing GPL-3.0-licensed Telegram music player. The original GPL-3.0 license text and copyright notices are intentionally retained in `LICENSE` and inherited source files to preserve their legal attribution. Those notices identify upstream authorship; they are not the current bot owner or product identity.
 
-<p align="center">
-  Made with 🖤 by <a href="https://github.com/ashokshau">Ashok Shau</a>
-</p>
+## Telegram Mini App identity
+
+- **Bot:** [@CatalystMusicBot](https://t.me/CatalystMusicBot)
+- **Mini App short name:** `player`
+- **Mini App deep link:** `https://t.me/CatalystMusicBot/player?startapp=<chat_id>`
+- **Application route:** `/room`
+
+In BotFather, create or configure the Mini App for `@CatalystMusicBot`, set its short name to `player`, and point its HTTPS URL to the deployed app's `/room` route. The `startapp` value selects the Telegram chat room.

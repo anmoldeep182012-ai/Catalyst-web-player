@@ -2,5 +2,6 @@ services:
   tg-web:
     build: .
     env_file: .env
-    ports:
-      - "${PORT:-8080}:${PORT:-8080}"
+    # Pion WebRTC needs direct UDP sockets. Host networking avoids Docker's
+    # UDP NAT rewriting ICE candidate ports on a Linux VPS.
+    network_mode: host

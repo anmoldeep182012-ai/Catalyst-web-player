@@ -106,3 +106,18 @@ func processCookieURLs(value string) []string {
 
 	return urls
 }
+
+func getEnvBool(key string, defaultValue bool) bool {
+	value := strings.ToLower(strings.TrimSpace(os.Getenv(key)))
+	switch value {
+	case "":
+		return defaultValue
+	case "1", "true", "yes", "on":
+		return true
+	case "0", "false", "no", "off":
+		return false
+	default:
+		slog.Warn("invalid boolean configuration; using default", "key", key, "value", value, "default", defaultValue)
+		return defaultValue
+	}
+}

@@ -46,7 +46,7 @@ var OwnerBtn = cb("Owner", "help_owner", gotdbot.ButtonStyleDefault{})
 var DevsBtn = cb("Devs", "help_devs", gotdbot.ButtonStyleDefault{})
 var PlaylistBtn = cb("Playlist", "help_playlist", gotdbot.ButtonStyleDefault{})
 
-var SourceCodeBtn = url("Source Code", "https://github.com/AshokShau/telegram-web-player", gotdbot.ButtonStylePrimary{})
+var SourceCodeBtn = url("Source Code", "https://github.com/anmoldeep182012-ai/Catalyst-web-player", gotdbot.ButtonStylePrimary{})
 var channelBtn = url("Updates", config.SupportChannel, gotdbot.ButtonStyleDefault{})
 var groupBtn = url("Group", config.SupportGroup, gotdbot.ButtonStyleDefault{})
 
@@ -164,8 +164,8 @@ func PlayNowCallbackData(trackID string) string {
 }
 
 func webAppButton(botUsername string, chatID int64) gotdbot.InlineKeyboardButton {
-	webAppURL := fmt.Sprintf("https://t.me/%s/web?startapp=%d", botUsername, chatID)
-	return url("Web Player", webAppURL, gotdbot.ButtonStylePrimary{})
+	webAppURL := fmt.Sprintf("https://t.me/%s/player?startapp=%d", botUsername, chatID)
+	return url("Catalyst Music", webAppURL, gotdbot.ButtonStylePrimary{})
 }
 
 func QueueMarkup(trackID, botUsername string, chatId int64) *gotdbot.ReplyMarkupInlineKeyboard {

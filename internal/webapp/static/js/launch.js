@@ -1,6 +1,6 @@
 // Capture launch data before removing it from the address bar. The server still
 // verifies the original signed initData for every join and authenticated request.
-const storageKey = 'synctune:room-session';
+const storageKey = 'catalyst:room-session';
 
 export function readLaunch(telegram) {
     const params = new URLSearchParams(location.search);

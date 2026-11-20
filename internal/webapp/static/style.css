@@ -85,6 +85,7 @@ button.avatar { width: var(--control-size); height: var(--control-size); box-sha
 .topbar { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 0 12px; }
 .brand { display: flex; align-items: center; gap: 10px; min-height: var(--control-size); text-decoration: none; font-size: 21px; letter-spacing: -.025em; font-weight: 700; }
 .brand > .icon { color: var(--accent); width: 25px; height: 25px; }
+.brand-logo { width: 30px; height: 30px; object-fit: cover; border-radius: 8px; flex: none; }
 .brand-dot { color: var(--accent); }
 .page-title { display: none; }
 .room-presence { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
