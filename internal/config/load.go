@@ -55,6 +55,8 @@ var (
 	PrivacyPolicyURL = getEnv("PRIVACY_POLICY_URL", "")
 
 	Port = getEnv("PORT", "6060")
+	WebRTCUDPPortMin = getEnvInt32("WEBRTC_UDP_PORT_MIN", 40000)
+	WebRTCUDPPortMax = getEnvInt32("WEBRTC_UDP_PORT_MAX", 49999)
 	BotCommandsEnabled = getEnvBool("BOT_COMMANDS_ENABLED", false)
 
 	DEVS        []int64
@@ -122,6 +124,10 @@ func validate() error {
 
 	if SongDurationLimit <= 0 {
 		return fmt.Errorf("SONG_DURATION_LIMIT must be greater than 0")
+	}
+
+	if WebRTCUDPPortMin < 1 || WebRTCUDPPortMax > 65535 || WebRTCUDPPortMax < WebRTCUDPPortMin {
+		return fmt.Errorf("WEBRTC_UDP_PORT_MIN/MAX must be a valid UDP port range (1-65535)")
 	}
 
 	return nil
