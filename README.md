@@ -27,7 +27,7 @@
 ---
 
 <p align="center">
-  <img src="https://files.catbox.moe/a9n3sd.jpg" width="180" alt="Catalyst Music logo" />
+  <img src="https://raw.githubusercontent.com/anmoldeep182012-ai/Catalyst-web-player/master/internal/webapp/static/assets/catalyst-logo.jpg" width="180" alt="Catalyst Music logo" />
 </p>
 
 <p align="center">
