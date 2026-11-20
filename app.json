@@ -13,6 +13,7 @@
   ],
   "stack": "container",
   "env": {
+    "BOT_COMMANDS_ENABLED": { "description": "False when Python Catalyst handles normal bot commands; Mini App verification callbacks remain enabled.", "required": false, "value": "false" },
     "API_ID": {
       "description": "Your Telegram API ID.",
       "required": true
@@ -63,7 +64,7 @@
     "DB_NAME": {
       "description": "Name of the MongoDB database.",
       "required": false,
-      "value": "MusicBot"
+      "value": "CatalystWebApp"
     },
     "PROXY": {
       "description": "Proxy URL for the bot.",

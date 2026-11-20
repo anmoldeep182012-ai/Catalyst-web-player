@@ -27,7 +27,7 @@
 ---
 
 <p align="center">
-  <img src="https://files.catbox.moe/a9n3sd.jpg" width="180" alt="Catalyst Music logo" />
+  <img src="internal/webapp/static/assets/catalyst-logo.jpg" width="180" alt="Catalyst Music logo" />
 </p>
 
 <p align="center">
@@ -86,7 +86,23 @@
 - **Single Active Session Protection**: Strict single-session per Telegram user enforcement with auto-disconnection and duplicate session alert screen.
 - **Listener Grace Period**: Stops room playback 40 seconds after all listeners leave, preserving the existing server lifecycle.
 
-### 🔐 Security & Access Controls
+### Catalyst bot integration
+
+This Mini App runs alongside [Catalyst-Mujik-Bot](https://github.com/anmoldeep182012-ai/Catalyst-Mujik-Bot).
+
+- The Python bot keeps its existing `/play` and `/vplay` commands and PyTgCalls voice-chat queue.
+- `/player` opens this browser player, with its own synchronized queue, room chat, playlists, and WebRTC voice rooms.
+- **The browser queue and PyTgCalls queue are separate.** This Mini App does not read, modify, or control the Python bot's existing Telegram voice-chat queue.
+- Run this Go service with the same bot token as the Python bot and set `BOT_COMMANDS_ENABLED=false`. The Go service keeps the Mini App's group-context verification callbacks; Python handles normal bot commands.
+- Keep the Go service's MongoDB database separate from the Python bot database. Use `CatalystWebApp` for the Go service.
+
+### BotFather setup
+
+Configure the bot's Mini App in [@BotFather](https://t.me/BotFather), use the title **Catalyst Music Player**, short name **player**, and set the HTTPS URL to `https://YOUR-DOMAIN/room`. Set the bot profile name to **Catalyst Music** and use the supplied artwork.
+
+The group launch uses a **Verify group for player** button to bind the Telegram chat before opening the app.
+
+## 🔐 Security & Access Controls
 - **Telegram Mini App Security**: Cryptographic `initData` HMAC verification against bot token hash to guarantee authenticated user sessions.
 - **Bot Write Access Verification**: Validates Telegram bot messaging permissions (`AllowsWriteToPM`) before accepting playback commands.
 - **Group Governance**: Granular play permissions (Everyone vs Admins) and admin controls (Skip, Stop, Seek, Loop, Queue Clear, End Session).
@@ -337,7 +353,7 @@ sudo systemctl enable --now docker
 
 ```bash
 git clone https://github.com/anmoldeep182012-ai/Catalyst-web-player.git
-cd telegram-web-player
+cd Catalyst-web-player
 cp sample.env .env
 nano .env
 ```
@@ -417,7 +433,7 @@ source ~/.bashrc
 
 ```bash
 git clone https://github.com/anmoldeep182012-ai/Catalyst-web-player.git
-cd telegram-web-player
+cd Catalyst-web-player
 cp sample.env .env
 nano .env
 ```
@@ -556,7 +572,7 @@ When new updates are released, update your deployment using the steps below:
 ### Docker Deployment Update
 
 ```bash
-cd telegram-web-player
+cd Catalyst-web-player
 git pull origin master
 docker compose down
 docker compose up -d --build
@@ -565,7 +581,7 @@ docker compose up -d --build
 ### Linux Deployment Update
 
 ```bash
-cd telegram-web-player
+cd Catalyst-web-player
 # Stop running instance (e.g. exit tmux/screen session)
 
 # Pull latest commits
