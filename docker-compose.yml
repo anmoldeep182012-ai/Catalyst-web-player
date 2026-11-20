@@ -2,6 +2,6 @@ services:
   tg-web:
     build: .
     env_file: .env
-    ports:
-      - "${PORT:-6060}:${PORT:-6060}/tcp"
-      - "${WEBRTC_UDP_PORT_MIN:-40000}-${WEBRTC_UDP_PORT_MAX:-49999}:${WEBRTC_UDP_PORT_MIN:-40000}-${WEBRTC_UDP_PORT_MAX:-49999}/udp"
+    # Pion WebRTC needs direct UDP sockets. Host networking avoids Docker's
+    # UDP NAT rewriting ICE candidate ports on a Linux VPS.
+    network_mode: host
