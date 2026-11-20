@@ -320,14 +320,13 @@ BotFather:
 Good! Now please choose a short name for your web app.
 3-30 characters: a-z, A-Z, 0-9, _ or .
 
-- THIS IS IMP DONT CHANGE THIS 
-web 
+player 
 
 BotFather:
-You can now use "web" as the short_name parameter value in Bot API.
+You can now use "player" as the short_name parameter value in Bot API.
 Your web app link is:
 
-https://t.me/YourMusicBot/web
+https://t.me/CatalystMusicBot/player
 ```
 
 </details>
@@ -341,9 +340,9 @@ https://t.me/YourMusicBot/web
 
 <br>
 
-Docker isolates all required dependencies (Go, FFmpeg, yt-dlp, Deno, TDLib) inside a container. The Compose file publishes the HTTP port and the configured WebRTC UDP range.
+Docker isolates all required dependencies (Go, FFmpeg, yt-dlp, Deno, TDLib) inside a container. The Compose file uses Linux host networking so Pion's WebRTC UDP sockets are directly reachable without Docker bridge NAT.
 
-**WebRTC networking requirement:** this app relays voice through its Pion SFU. In addition to HTTPS, make the configured UDP range (`WEBRTC_UDP_PORT_MIN`–`WEBRTC_UDP_PORT_MAX`, default `40000–49999`) reachable on the VPS and publish the same UDP range from Docker. A Cloudflare Tunnel by itself is not enough for voice media because the browser must reach the server's ICE UDP candidates directly. Use a VPS with a public IPv4 address and a firewall rule for the UDP range.
+**WebRTC networking requirement:** this app relays voice through its Pion SFU. In addition to HTTPS, allow the configured UDP range (`WEBRTC_UDP_PORT_MIN`–`WEBRTC_UDP_PORT_MAX`, default `40000–49999`) in the VPS firewall. Compose uses host networking; do not add Docker port mappings. A Cloudflare Tunnel by itself is not enough for voice media because browsers must reach the server's ICE UDP candidates directly.
 
 #### 1. Install Docker & Docker Compose
 On Ubuntu / Debian:
@@ -377,7 +376,7 @@ Or using standard Docker CLI:
 
 ```bash
 docker build -t tgweb .
-docker run -d --name tgweb --env-file .env -p 6060:6060/tcp -p 40000-49999:40000-49999/udp --restart unless-stopped tgweb
+docker run -d --name tgweb --network host --env-file .env --restart unless-stopped tgweb
 ```
 
 #### 4. Container Management
