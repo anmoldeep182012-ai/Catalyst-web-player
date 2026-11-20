@@ -268,10 +268,10 @@ To attach the Web Player interface to your Telegram bot:
 BotFather:
 Alright, a new web app. Which bot will be offering the web app?
 
-@YourMusicBot
+@CatalystMusicBot
 
 BotFather:
-Creating a new web app for @YourMusicBot.
+Creating a new Mini App for @CatalystMusicBot.
 Please enter a title for the web app.
 
 Catalyst Music Player
@@ -641,26 +641,17 @@ This project is licensed under the **GNU General Public License v3.0**. See the 
 
 ---
 
-## ❤️ Donate
+## Project owner & maintenance
 
-If you find this project useful, consider supporting its development with a donation:
+- **Owner:** [@Cravenic](https://t.me/Cravenic)
+- **Bot:** [@CatalystMusicBot](https://t.me/CatalystMusicBot)
+- **Repository:** [Catalyst-web-player](https://github.com/anmoldeep182012-ai/Catalyst-web-player)
 
-- **GRAM (TON) / USDT-GRAM:** `UQD8rsWDh3VD9pXVNuEbM_rIAKzV07xDhx-gzdDe0tTWGXan`
-- **USDT (TRC20):** `TJWZqPK5haSE8ZdSQeWBPR5uxPSUnS8Hcq`
-- **Telegram Wallet:** [@Ashokshau](https://t.me/Ashokshau)
+Catalyst Music branding, deployment configuration, and downstream maintenance are managed by @Cravenic.
 
-Thank you for supporting the project!
+## Upstream license notices
 
----
-
-<p align="center">
-  Made with 🖤 by <a href="https://github.com/ashokshau">Ashok Shau</a>
-</p>
-
-
-## Upstream project and license
-
-This repository is a rebranded fork of [AshokShau/telegram-web-player](https://github.com/AshokShau/telegram-web-player). The upstream GPL-3.0 license and original copyright notices are retained. Catalyst Music branding and downstream changes are maintained in this repository.
+This repository is a downstream rebrand of an existing GPL-3.0-licensed Telegram music player. The original GPL-3.0 license text and copyright notices are intentionally retained in `LICENSE` and inherited source files to preserve their legal attribution. Those notices identify upstream authorship; they are not the current bot owner or product identity.
 
 ## Telegram Mini App identity
 
