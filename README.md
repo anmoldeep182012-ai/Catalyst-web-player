@@ -17,21 +17,21 @@
     <img src="https://img.shields.io/badge/License-GPL%20v3-4bc51d?style=for-the-badge" alt="License">
   </a>
   <a href="https://github.com/anmoldeep182012-ai/Catalyst-web-player/stargazers">
-    <img src="https://img.shields.io/github/stars/AshokShau/telegram-web-player?style=for-the-badge&color=ffd700&logo=github" alt="Stars">
+    <img src="https://img.shields.io/github/stars/anmoldeep182012-ai/Catalyst-web-player?style=for-the-badge&color=ffd700&logo=github" alt="Stars">
   </a>
   <a href="https://github.com/anmoldeep182012-ai/Catalyst-web-player/network/members">
-    <img src="https://img.shields.io/github/forks/AshokShau/telegram-web-player?style=for-the-badge&color=blue&logo=github" alt="Forks">
+    <img src="https://img.shields.io/github/forks/anmoldeep182012-ai/Catalyst-web-player?style=for-the-badge&color=blue&logo=github" alt="Forks">
   </a>
 </p>
 
 ---
 
 <p align="center">
-  <img src=".github/images/dark.png" width="100%" alt="Catalyst Music player" />
+  <img src="https://files.catbox.moe/a9n3sd.jpg" width="180" alt="Catalyst Music logo" />
 </p>
 
 <p align="center">
-  <sub>Browser review capture using synthetic fixture music and listeners.</sub>
+  <sub>Official Catalyst Music branding.</sub>
 </p>
 
 
@@ -152,9 +152,9 @@ cp sample.env .env
 | `DOWNLOADS_DIR`       |    No    | `downloads`                   | Local temporary directory for media downloads.                                              |
 | `PROXY`               |    No    | -                             | Optional HTTP/SOCKS proxy URL for external media downloads.                                 |
 | `COOKIES_URL`         |    No    | -                             | Comma-separated HTTP URLs pointing to raw YouTube `cookies.txt` files.                      |
-| `SUPPORT_GROUP`       |    No    | `https://t.me/FallenSupport`  | Support group URL shown in help menus.                                                      |
+| `SUPPORT_GROUP`       |    No    | `https://t.me/CatalystxSupport`  | Support group URL shown in help menus.                                                      |
 | `PRIVACY_POLICY_URL`  |    No    | -                             | Public HTTPS policy URL, e.g. `https://music.yourdomain.com/privacy`, linked by `/privacy`. |
-| `SUPPORT_CHANNEL`     |    No    | `https://t.me/FallenProjects` | Updates channel URL shown in help menus.                                                    |
+| `SUPPORT_CHANNEL`     |    No    | `https://t.me/CatalystxSupport` | Updates channel URL shown in help menus.                                                    |
 | `START_IMG`           |    No    | (default URL)                 | Direct image URL displayed in `/start` command response.                                    |
 | `DEVS`                |    No    | -                             | Space or comma separated list of additional developer user IDs.                             |
 
@@ -635,8 +635,8 @@ This project is licensed under the **GNU General Public License v3.0**. See the 
 
 ## 💬 Support & Updates
 
-- **Support Group**: [Telegram Support](https://t.me/FallenSupport)
-- **Updates Channel**: [Telegram Channel](https://t.me/FallenProjects)
+- **Support Group**: [Telegram Support](https://t.me/CatalystxSupport)
+- **Updates Channel**: [Telegram Channel](https://t.me/CatalystxSupport)
 
 ---
 
