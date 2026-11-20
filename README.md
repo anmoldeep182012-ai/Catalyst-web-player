@@ -188,60 +188,41 @@ cp sample.env .env
 
 Telegram Mini Apps **require** a valid HTTPS domain (`https://`). Below are the easiest ways to expose your local or VPS web player port (`6060`) securely to a custom domain.
 
-#### Option 1: Cloudflare Tunnel (HTTP-only; not sufficient for WebRTC voice)
+#### Option 1: Cloudflare Tunnel (preview only; no WebRTC voice)
 
-Cloudflare Tunnel lets you route traffic from your domain to your local Docker container without opening inbound firewall ports or configuring SSL manually.
-
-1. Go to **Cloudflare Zero Trust Dashboard** -> **Networks** -> **Tunnels** and click **Create a Tunnel**.
-2. Name your tunnel, copy the tunnel token provided (`eyJh...`), and add it to your `.env` file:
-   ```env
-   TUNNEL_TOKEN=eyJh...
-   ```
-3. Route your hostname (e.g. `music.yourdomain.com`) to HTTP service `tg-web:6060` (or `localhost:6060`).
-4. Update your `docker-compose.yml` to include the Cloudflare Tunnel service:
-
-```yaml
-services:
-  tg-web:
-    build: .
-    env_file: .env
-    ports:
-      - "${PORT:-6060}:${PORT:-6060}"
-    restart: unless-stopped
-
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    restart: unless-stopped
-    command: tunnel --no-autoupdate run
-    environment:
-      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-```
-
-5. Run `docker compose up -d` and set your Web App URL in BotFather to `https://music.yourdomain.com/room`.
-
-> **Quick Tunnel (Temporary / Testing):**
-> If you don't own a domain yet, run `cloudflared tunnel --url http://localhost:6060` to instantly get a temporary `https://xxx.trycloudflare.com` URL.
+Cloudflare Tunnel can expose the HTTP player page and WebSocket signaling, but it does not publish the Pion server's inbound UDP media ports. Use it only for a web-interface preview. For working voice rooms, use a VPS with a public IPv4 address, direct UDP firewall access, and Caddy or Nginx.
 
 ---
 
-#### Option 2: Caddy Reverse Proxy (Automatic SSL)
+#### Option 2: Caddy Reverse Proxy (recommended)
 
-Caddy automatically obtains and renews Let's Encrypt TLS/SSL certificates for your domain.
+Caddy obtains and renews HTTPS certificates automatically. Point your DNS A record to the VPS IPv4 address and allow TCP ports 80 and 443.
 
-1. Install Caddy on your server:
-   ```bash
-   sudo apt install -y caddy
-   ```
-2. Edit `/etc/caddy/Caddyfile`:
-   ```caddy
-   music.yourdomain.com {
-       reverse_proxy localhost:6060
-   }
-   ```
-3. Restart Caddy:
-   ```bash
-   sudo systemctl restart caddy
-   ```
+Install Caddy from its official stable repository:
+
+```bash
+sudo apt install --yes debian-keyring debian-archive-keyring apt-transport-https curl gnupg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+sudo chmod o+r /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+sudo chmod o+r /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update
+sudo apt install -y caddy
+```
+
+Edit `/etc/caddy/Caddyfile`:
+
+```caddy
+music.yourdomain.com {
+    reverse_proxy 127.0.0.1:6060
+}
+```
+
+Then reload Caddy:
+
+```bash
+sudo systemctl reload caddy
+```
 
 ---
 
