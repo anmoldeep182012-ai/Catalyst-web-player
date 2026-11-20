@@ -19,7 +19,7 @@ import (
 )
 
 const (
-	defaultDBName         = "Anon"
+	defaultDBName         = "CatalystWebApp"
 	defaultAPIURL         = "https://api.onegrab.fun"
 	defaultDownloadsDir   = "downloads"
 	defaultSupportGroup   = "https://t.me/CatalystxSupport"
@@ -55,6 +55,7 @@ var (
 	PrivacyPolicyURL = getEnv("PRIVACY_POLICY_URL", "")
 
 	Port = getEnv("PORT", "6060")
+	BotCommandsEnabled = getEnvBool("BOT_COMMANDS_ENABLED", false)
 
 	DEVS        []int64
 	CookiesPath []string

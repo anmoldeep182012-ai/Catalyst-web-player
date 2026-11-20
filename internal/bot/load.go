@@ -17,6 +17,10 @@ import (
 
 var startTime = time.Now()
 
+func LoadMiniAppHandlers(c *gotdbot.Client) {
+	// Keep secure group-context verification active when Python Catalyst owns normal bot commands.
+}
+
 func LoadModules(c *gotdbot.Client, cancelCleanup func(int64)) {
 	register := func(name string, handler func(*gotdbot.Client, *gotdbot.Message) error) {
 		c.OnCommand(name, handler)
