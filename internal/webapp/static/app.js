@@ -47,7 +47,7 @@ function changed(key, value) { const next = JSON.stringify(value); if (renderKey
 function renderBotProfile() {
     const profile = state.botProfile;
     if (!profile || typeof profile !== 'object') return;
-    const name = typeof profile.name === 'string' && profile.name.trim() ? profile.name.trim() : 'SyncTune';
+    const name = typeof profile.name === 'string' && profile.name.trim() ? profile.name.trim() : 'Catalyst Music';
     const username = typeof profile.username === 'string' && /^[a-zA-Z0-9_]{5,32}$/.test(profile.username) ? profile.username : '';
     const count = Number(profile.monthlyActiveUsers);
     for (const node of document.querySelectorAll('[data-bot-name]')) { node.textContent = name; node.title = name; }
@@ -87,7 +87,7 @@ function participant(user, { voiceParticipant = false } = {}) {
 }
 
 const wideLayout = matchMedia('(min-width: 1100px)');
-const viewTitles = new Map([['home', 'SyncTune'], ['search', 'Search'], ['queue', 'Queue'], ['library', 'Library'], ['playlist', 'Playlist'], ['music-collection', 'Collection'], ['artists', 'Artists'], ['artist', 'Artist'], ['profile', 'Settings'], ['settings', 'Settings'], ['mix', 'Similar tracks'], ['history', 'Recently played']]);
+const viewTitles = new Map([['home', 'Catalyst Music'], ['search', 'Search'], ['queue', 'Queue'], ['library', 'Library'], ['playlist', 'Playlist'], ['music-collection', 'Collection'], ['artists', 'Artists'], ['artist', 'Artist'], ['profile', 'Settings'], ['settings', 'Settings'], ['mix', 'Similar tracks'], ['history', 'Recently played']]);
 const settingsTitles = new Map([['account', 'Account'], ['playback', 'Playback'], ['appearance', 'Appearance'], ['room', 'Room settings'], ['partner', 'Partner access']]);
 let settingsSection = 'playback';
 function openSettings(section) {
@@ -147,14 +147,14 @@ function navigate(view, { focus = true } = {}) {
 function renderPageTitle() {
     if (state.view === 'home') {
         const name = document.getElementById('home-title')?.textContent;
-        let title = 'SyncTune';
+        let title = 'Catalyst Music';
         if (document.documentElement.classList.contains('telegram-title-slot')) title = name || 'Home';
-        else if (name && name !== 'Home') title = `SyncTune · ${name}`;
+        else if (name && name !== 'Home') title = `Catalyst Music · ${name}`;
         text('page-title', title);
         return;
     }
     const title = state.view === 'settings' ? settingsTitles.get(settingsSection) : state.view === 'playlist' ? selectedPlaylist()?.name : viewTitles.get(state.view);
-    text('page-title', title || 'SyncTune');
+    text('page-title', title || 'Catalyst Music');
 }
 function updateBackButton() {
     document.body.classList.toggle('conversation-open', state.chat.open || state.voice.open);
