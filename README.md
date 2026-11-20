@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>🎵 Telegram Web Player</h1>
+<h1>🎵 𝐂ᴀᴛᴀʟʏsᴛ 𝐌ᴜsɪᴄ</h1>
 
 <p>
   <b>A modern, high-performance Telegram web music player with real-time synchronized playback, built-in WebRTC Voice Chat, live room chat, personal playlists, and smart recommendations.</b>
@@ -13,13 +13,13 @@
   <a href="https://www.docker.com/">
     <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
   </a>
-  <a href="https://github.com/AshokShau/telegram-web-player/blob/master/LICENSE">
+  <a href="https://github.com/anmoldeep182012-ai/Catalyst-web-player/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/License-GPL%20v3-4bc51d?style=for-the-badge" alt="License">
   </a>
-  <a href="https://github.com/AshokShau/telegram-web-player/stargazers">
+  <a href="https://github.com/anmoldeep182012-ai/Catalyst-web-player/stargazers">
     <img src="https://img.shields.io/github/stars/AshokShau/telegram-web-player?style=for-the-badge&color=ffd700&logo=github" alt="Stars">
   </a>
-  <a href="https://github.com/AshokShau/telegram-web-player/network/members">
+  <a href="https://github.com/anmoldeep182012-ai/Catalyst-web-player/network/members">
     <img src="https://img.shields.io/github/forks/AshokShau/telegram-web-player?style=for-the-badge&color=blue&logo=github" alt="Forks">
   </a>
 </p>
@@ -27,7 +27,7 @@
 ---
 
 <p align="center">
-  <img src=".github/images/dark.png" width="100%" alt="SyncTune desktop room" />
+  <img src=".github/images/dark.png" width="100%" alt="Catalyst Music player" />
 </p>
 
 <p align="center">
@@ -36,7 +36,7 @@
 
 
 <p align="center">
-  Telegram Web Player delivers low-latency, ultra-synchronized web playback and voice communication for chat rooms.<br>
+  Catalyst Music Mini App delivers low-latency, ultra-synchronized web playback and voice communication for chat rooms.<br>
   Engineered with <b>Go</b>, <code>gotdbot</code> (TDLib), <b>Pion WebRTC SFU</b>, WebSockets, MongoDB, and a responsive music application.
 </p>
 
@@ -274,7 +274,7 @@ BotFather:
 Creating a new web app for @YourMusicBot.
 Please enter a title for the web app.
 
-SyncTune Player
+Catalyst Music Player
 
 BotFather:
 Please enter a short description of the web app.
@@ -336,7 +336,7 @@ sudo systemctl enable --now docker
 #### 2. Clone Repository & Configure Environment
 
 ```bash
-git clone https://github.com/AshokShau/telegram-web-player.git
+git clone https://github.com/anmoldeep182012-ai/Catalyst-web-player.git
 cd telegram-web-player
 cp sample.env .env
 nano .env
@@ -416,7 +416,7 @@ source ~/.bashrc
 #### 2. Clone Repository & Prepare Configuration
 
 ```bash
-git clone https://github.com/AshokShau/telegram-web-player.git
+git clone https://github.com/anmoldeep182012-ai/Catalyst-web-player.git
 cd telegram-web-player
 cp sample.env .env
 nano .env
@@ -655,3 +655,17 @@ Thank you for supporting the project!
 <p align="center">
   Made with 🖤 by <a href="https://github.com/ashokshau">Ashok Shau</a>
 </p>
+
+
+## Upstream project and license
+
+This repository is a rebranded fork of [AshokShau/telegram-web-player](https://github.com/AshokShau/telegram-web-player). The upstream GPL-3.0 license and original copyright notices are retained. Catalyst Music branding and downstream changes are maintained in this repository.
+
+## Telegram Mini App identity
+
+- **Bot:** [@CatalystMusicBot](https://t.me/CatalystMusicBot)
+- **Mini App short name:** `player`
+- **Mini App deep link:** `https://t.me/CatalystMusicBot/player?startapp=<chat_id>`
+- **Application route:** `/room`
+
+In BotFather, create or configure the Mini App for `@CatalystMusicBot`, set its short name to `player`, and point its HTTPS URL to the deployed app's `/room` route. The `startapp` value selects the Telegram chat room.
