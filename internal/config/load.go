@@ -24,7 +24,7 @@ const (
 	defaultDownloadsDir   = "downloads"
 	defaultSupportGroup   = "https://t.me/CatalystxSupport"
 	defaultSupportChannel = "https://t.me/CatalystxSupport"
-	defaultStartImage     = "https://files.catbox.moe/a9n3sd.jpg"
+	defaultStartImage     = "https://raw.githubusercontent.com/anmoldeep182012-ai/Catalyst-web-player/master/internal/webapp/static/assets/catalyst-logo.jpg"
 	defaultMaxFileSize    = int64(500 * 1024 * 1024)
 	defaultSongDuration   = int32(3600)
 )
