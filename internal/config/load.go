@@ -22,9 +22,9 @@ const (
 	defaultDBName         = "Anon"
 	defaultAPIURL         = "https://api.onegrab.fun"
 	defaultDownloadsDir   = "downloads"
-	defaultSupportGroup   = "https://t.me/FallenSupport"
-	defaultSupportChannel = "https://t.me/FallenProjects"
-	defaultStartImage     = "https://i.pinimg.com/736x/0d/f4/65/0df465d1e98239ecb6283400605fc813.jpg"
+	defaultSupportGroup   = "https://t.me/CatalystxSupport"
+	defaultSupportChannel = "https://t.me/CatalystxSupport"
+	defaultStartImage     = "https://files.catbox.moe/a9n3sd.jpg"
 	defaultMaxFileSize    = int64(500 * 1024 * 1024)
 	defaultSongDuration   = int32(3600)
 )
@@ -52,7 +52,7 @@ var (
 	SupportGroup     = getEnv("SUPPORT_GROUP", defaultSupportGroup)
 	SupportChannel   = getEnv("SUPPORT_CHANNEL", defaultSupportChannel)
 	StartImg         = getEnv("START_IMG", defaultStartImage)
-	PrivacyPolicyURL = getEnv("PRIVACY_POLICY_URL", "https://sync.onegrab.fun/privacy")
+	PrivacyPolicyURL = getEnv("PRIVACY_POLICY_URL", "")
 
 	Port = getEnv("PORT", "6060")
 
