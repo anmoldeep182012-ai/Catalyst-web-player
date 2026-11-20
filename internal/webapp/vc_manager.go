@@ -12,8 +12,8 @@ import (
 	"slices"
 	"sync"
 
-	td "github.com/AshokShau/gotdbot"
 	"ashokshau/tg-web/internal/config"
+	td "github.com/AshokShau/gotdbot"
 	"github.com/pion/webrtc/v4"
 )
 
