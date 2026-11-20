@@ -17,7 +17,7 @@ import (
 func publicBotProfile(user *td.User) map[string]any {
 	name := strings.TrimSpace(user.FirstName + " " + user.LastName)
 	if name == "" {
-		name = "SyncTune"
+		name = "Catalyst Music"
 	}
 	profile := map[string]any{"name": name}
 	if user.Usernames != nil {
