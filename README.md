@@ -158,6 +158,8 @@ cp sample.env .env
 | `MONGO_URI`           | **Yes**  | -                             | MongoDB connection URI string.                                                              |
 | `BOT_COMMANDS_ENABLED` |    No    | `false`                       | Keep false when the Python Catalyst bot handles normal commands; group verification callbacks stay enabled. |
 | `PORT`                |    No    | `6060`                        | Web server HTTP port for Web App and WebSockets.                                            |
+| `WEBRTC_UDP_PORT_MIN` |    No    | `40000`                      | First UDP port used by the Pion WebRTC voice server.                                       |
+| `WEBRTC_UDP_PORT_MAX` |    No    | `49999`                      | Last UDP port used by the Pion WebRTC voice server.                                        |
 | `API_URL`             |    No    | `https://api.onegrab.fun`     | Downloader API endpoint URL.                                                                |
 | `API_KEY`             |    No    | -                             | Optional API Key for downloader API.                                                        |
 | `DL_BOT_TOKEN`        |    No    | -                             | Optional secondary downloader bot token for Telegram file fetching.                         |
@@ -186,7 +188,7 @@ cp sample.env .env
 
 Telegram Mini Apps **require** a valid HTTPS domain (`https://`). Below are the easiest ways to expose your local or VPS web player port (`6060`) securely to a custom domain.
 
-#### Option 1: Cloudflare Tunnel with Docker Compose (Easiest & Free)
+#### Option 1: Cloudflare Tunnel (HTTP-only; not sufficient for WebRTC voice)
 
 Cloudflare Tunnel lets you route traffic from your domain to your local Docker container without opening inbound firewall ports or configuring SSL manually.
 
@@ -339,7 +341,9 @@ https://t.me/YourMusicBot/web
 
 <br>
 
-Docker isolates all required dependencies (Go 1.26, FFmpeg, yt-dlp, Deno, TDLib) inside a container.
+Docker isolates all required dependencies (Go, FFmpeg, yt-dlp, Deno, TDLib) inside a container. The Compose file publishes the HTTP port and the configured WebRTC UDP range.
+
+**WebRTC networking requirement:** this app relays voice through its Pion SFU. In addition to HTTPS, make the configured UDP range (`WEBRTC_UDP_PORT_MIN`–`WEBRTC_UDP_PORT_MAX`, default `40000–49999`) reachable on the VPS and publish the same UDP range from Docker. A Cloudflare Tunnel by itself is not enough for voice media because the browser must reach the server's ICE UDP candidates directly. Use a VPS with a public IPv4 address and a firewall rule for the UDP range.
 
 #### 1. Install Docker & Docker Compose
 On Ubuntu / Debian:
@@ -373,7 +377,7 @@ Or using standard Docker CLI:
 
 ```bash
 docker build -t tgweb .
-docker run -d --name tgweb --env-file .env -p 6060:6060 --restart unless-stopped tgweb
+docker run -d --name tgweb --env-file .env -p 6060:6060/tcp -p 40000-49999:40000-49999/udp --restart unless-stopped tgweb
 ```
 
 #### 4. Container Management
