@@ -27,7 +27,7 @@
 ---
 
 <p align="center">
-  <img src="internal/webapp/static/assets/catalyst-logo.jpg" width="180" alt="Catalyst Music logo" />
+  <img src="https://files.catbox.moe/a9n3sd.jpg" width="180" alt="Catalyst Music logo" />
 </p>
 
 <p align="center">
@@ -156,11 +156,12 @@ cp sample.env .env
 | `TOKEN`               | **Yes**  | -                             | Telegram Bot Token from @BotFather.                                                         |
 | `OWNER_ID`            | **Yes**  | -                             | Telegram User ID of the bot owner.                                                          |
 | `MONGO_URI`           | **Yes**  | -                             | MongoDB connection URI string.                                                              |
+| `BOT_COMMANDS_ENABLED` |    No    | `false`                       | Keep false when the Python Catalyst bot handles normal commands; group verification callbacks stay enabled. |
 | `PORT`                |    No    | `6060`                        | Web server HTTP port for Web App and WebSockets.                                            |
 | `API_URL`             |    No    | `https://api.onegrab.fun`     | Downloader API endpoint URL.                                                                |
 | `API_KEY`             |    No    | -                             | Optional API Key for downloader API.                                                        |
 | `DL_BOT_TOKEN`        |    No    | -                             | Optional secondary downloader bot token for Telegram file fetching.                         |
-| `DB_NAME`             |    No    | `Anon`                        | Database name inside MongoDB.                                                               |
+| `DB_NAME`             |    No    | `CatalystWebApp`                        | Database name inside MongoDB.                                                               |
 | `LOGGER_ID`           |    No    | `0`                           | Telegram chat/channel ID where bot startup logs and errors are sent.                        |
 | `DEFAULT_SERVICE`     |    No    | `youtube`                     | Default search engine for track queries (`youtube` or `spotify`).                           |
 | `SONG_DURATION_LIMIT` |    No    | `3600`                        | Maximum track duration allowed in seconds (default: 1 hour).                                |

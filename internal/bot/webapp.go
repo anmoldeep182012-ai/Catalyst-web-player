@@ -21,7 +21,7 @@ func webAppCommandHandler(c *td.Client, m *td.Message) error {
 	chatID := m.ChatId
 	botUsername := c.Me().Usernames.EditableUsername
 
-	text := "🌐 <b>Web App Player</b>\n\nClick the button below to open the synchronized Web App player for this chat room."
+	text := "🎧 <b>Catalyst Music</b>\n\nClick the button below to open the synchronized Web App player for this chat room."
 	_, err := m.ReplyText(c, text, &td.SendMessageOpts{
 		ParseMode:   "HTML",
 		ReplyMarkup: webapp.WebAppControlButtons("webapp", botUsername, chatID),
@@ -55,5 +55,5 @@ func webAppVerifyCallbackHandler(c *td.Client, cb *td.UpdateNewCallbackQuery) er
 		return nil
 	}
 
-	return cb.Answer(c, "Group ready. Tap Open Web App Player to join.", &td.CallbackAnswerOpts{ShowAlert: true})
+	return cb.Answer(c, "Group ready. Tap Open Catalyst Music to join.", &td.CallbackAnswerOpts{ShowAlert: true})
 }
